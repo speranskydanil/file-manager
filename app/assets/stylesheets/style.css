@@ -1,0 +1,12 @@
+body {
+  padding-top: 60px;
+}
+
+.footer {
+  margin: 10px 0px;
+  padding: 10px 20px;
+  border-top: 2px solid #444;
+  font-size: 13px;
+  font-style: italic;
+}
+
