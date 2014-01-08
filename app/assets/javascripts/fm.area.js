@@ -433,6 +433,12 @@ FM.Area = function (selector, main_controller) {
 
   Controller.index();
 
+  $(window).unbind('resize.area').bind('resize.area', function () {
+    $('.fm .area tbody').height($('.fm .area tbody').height() + $(window).height() - $('html').height() - 10);
+  });
+
+  $(window).trigger('resize.area');
+
   return {
     Model: Model,
     Controller: Controller,
