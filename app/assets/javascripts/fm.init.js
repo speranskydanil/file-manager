@@ -22,10 +22,6 @@ var FM = {
     var area_2 = this.Area('.fm .area-2', main_controller);
 
     main_controller.set_areas(area_1, area_2);
-
-    $('.fm-modal button').click(function () {
-      $('.fm-modal .modal-body').empty();
-    });
   }
 };
 

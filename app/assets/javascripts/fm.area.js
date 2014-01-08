@@ -385,29 +385,37 @@ FM.Area = function (selector, main_controller) {
     },
 
     show_text: function (name, text) {
-      $('.fm-modal .modal-title').text(name);
-      $('.fm-modal .modal-body').html('<pre>' + text + '</pre>');
-      $('.fm-modal').modal();
+      Message.alert({
+        title: name,
+        content: '<pre>' + text + '</pre>',
+        size: 'large'
+      });
     },
 
     show_media: function (item) {
       var src = '/read/' + encodeURIComponent(item.path);
 
-      $('.fm-modal .modal-title').text(item.name);
-
       if (Model.is_image(item)) {
-        $('.fm-modal .modal-body').html('<img src="' + src + '">');
+        var html = '<img src="' + src + '">';
       }
 
       if (Model.is_audio(item)) {
-        $('.fm-modal .modal-body').html('<audio controls><source src="' + src + '">Your browser does not support the audio tag.</audio>');
+        var html = '<audio controls><source src="' +
+                   src +
+                   '">Your browser does not support the audio tag.</audio>';
       }
 
       if (Model.is_video(item)) {
-        $('.fm-modal .modal-body').html('<video controls><source src="' + src + '">Your browser does not support the video tag.</video>');
+        var html = '<video controls><source src="' +
+                   src +
+                   '">Your browser does not support the video tag.</video>';
       }
 
-      $('.fm-modal').modal();
+      Message.alert({
+        title: item.name,
+        content: html,
+        size: 'large'
+      });
     },
 
     message: function (text) {
