@@ -60,65 +60,97 @@ FM.MainController = function () {
     },
 
     delete: function (items) {
-      if (!confirm('Are you sure?')) return;
+      var self = this;
 
-      $.each(items, function (i, item) {
-        $.ajax({
-          url: '/remove/' + encodeURIComponent(item.path),
-          type: 'POST',
-          async: false,
-        });
+      Message.confirm({
+        title: 'Delete',
+        content: 'Are you sure?',
+        callback: function (response) {
+          if (response) {
+            $.each(items, function (i, item) {
+              $.ajax({
+                url: '/remove/' + encodeURIComponent(item.path),
+                type: 'POST',
+                async: false,
+              });
+            });
+
+            self.update();
+          }
+        }
       });
-
-      this.update();
     },
 
     rename: function (item) {
-      var p = prompt('New name', item.name);
-      if (!p) return;
+      var self = this;
 
-      $.ajax({
-        url: '/rename/' +
-             encodeURIComponent(item.path) +
-             '/' +
-             encodeURIComponent(p),
-        type: 'POST',
-        async: false,
+      Message.prompt({
+        title: 'Rename',
+        content: 'Enter the new name',
+        callback: function (response) {
+          if (response) {
+            $.ajax({
+              url: '/rename/' +
+                   encodeURIComponent(item.path) +
+                   '/' +
+                   encodeURIComponent(response),
+              type: 'POST',
+              async: false,
+            });
+
+            self.update();
+          }
+        },
+        value: item.name
       });
-
-      this.update();
     },
 
     zip: function (item) {
-      var p = prompt('Name', item.name);
-      if (!p) return;
+      var self = this;
 
-      $.ajax({
-        url: '/zip/' +
-             encodeURIComponent(item.path) +
-             '/' +
-             encodeURIComponent(p),
-        type: 'POST',
-        async: false,
+      Message.prompt({
+        title: 'Zip',
+        content: 'Enter the zip name',
+        callback: function (response) {
+          if (response) {
+            $.ajax({
+              url: '/zip/' +
+                   encodeURIComponent(item.path) +
+                   '/' +
+                   encodeURIComponent(response),
+              type: 'POST',
+              async: false,
+            });
+
+            self.update();
+          }
+        },
+        value: item.name
       });
-
-      this.update();
     },
 
     unzip: function (item) {
-      var p = prompt('Name', item.name.replace('.zip', ''));
-      if (!p) return;
+      var self = this;
 
-      $.ajax({
-        url: '/unzip/' +
-             encodeURIComponent(item.path) +
-             '/' +
-             encodeURIComponent(p),
-        type: 'POST',
-        async: false,
+      Message.prompt({
+        title: 'Unzip',
+        content: 'Enter the directory name',
+        callback: function (response) {
+          if (response) {
+            $.ajax({
+              url: '/unzip/' +
+                   encodeURIComponent(item.path) +
+                   '/' +
+                   encodeURIComponent(response),
+              type: 'POST',
+              async: false,
+            });
+
+            self.update();
+          }
+        },
+        value: item.name.replace('.zip', '')
       });
-
-      this.update();
     },
 
     download: function (item) {
@@ -127,16 +159,24 @@ FM.MainController = function () {
     },
 
     mkdir: function (path) {
-      var p = prompt('New folder');
-      if (!p) return;
+      var self = this;
 
-      $.ajax({
-        url: '/mkdir/' + encodeURIComponent(path + '/' + p),
-        type: 'POST',
-        async: false,
+      Message.prompt({
+        title: 'New directory',
+        content: 'Enter the directory name',
+        callback: function (response) {
+          if (response) {
+            $.ajax({
+              url: '/mkdir/' + encodeURIComponent(path + '/' + response),
+              type: 'POST',
+              async: false,
+            });
+
+            self.update();
+          }
+        },
+        value: 'New directory'
       });
-
-      this.update();
     }
   };
 };

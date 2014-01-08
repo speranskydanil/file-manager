@@ -1,9 +1,10 @@
+//= require path
 //= require jquery
 //= require jquery.disableselection
 //= require jquery.contextMenu
-//= require bootstrap
+//= require message
 //= require stupidtable
-//= require path
+//= require bootstrap
 //= require fm.init
 //= require fm.main_controller
 //= require fm.area
