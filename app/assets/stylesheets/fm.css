@@ -22,6 +22,16 @@
   margin-bottom: 10px;
 }
 
+.fm .toolbar .bw {
+  display: inline-block;
+  width: 25%;
+  padding: 0px 5px;
+}
+
+.fm .toolbar button {
+  width: 100%;
+}
+
 .fm table {
   font-size: 12px !important;
 }

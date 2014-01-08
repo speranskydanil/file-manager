@@ -121,7 +121,7 @@ FM.Area = function (selector, main_controller) {
       return item.type == 'application/zip; charset=binary';
     },
 
-    hf: true
+    hf: false
   };
 
   var Controller = {
@@ -212,7 +212,7 @@ FM.Area = function (selector, main_controller) {
       for (var i = 0, l = list.length; i < l; i++) {
         var item = list[i];
 
-        if (Model.hf && item.name[0] == '.') continue;
+        if (!Model.hf && item.name[0] == '.') continue;
 
         if (Model.is_directory(item)) {
           var icon = '<span class="glyphicon glyphicon-folder-open"></span>';
@@ -259,6 +259,8 @@ FM.Area = function (selector, main_controller) {
       }
 
       area.find('table').stupidtable();
+
+      $(window).trigger('resize.area');
 
       $.contextMenu({
         selector: selector + ' tbody tr',
@@ -359,25 +361,27 @@ FM.Area = function (selector, main_controller) {
 
       area.find('.toolbar').empty();
 
-      area.find('.toolbar').append('<button class="btn btn-default btn-sm up">Up</button> ');
+      area.find('.toolbar').append('<div class="bw"><button class="btn btn-default btn-sm up">Up</button></div>');
 
       area.find('.toolbar .up').click(function () {
         if (Model.cur_dir() != Model.base_dir()) Controller.index('up');
       });
 
-      area.find('.toolbar').append('<button class="btn btn-default btn-sm update">Update</button> ');
+      area.find('.toolbar').append('<div class="bw"><button class="btn btn-default btn-sm update">Update</button></div>');
 
       area.find('.toolbar .update').click(function () {
         Controller.index();
       });
 
-      area.find('.toolbar').append('<button class="btn btn-default btn-sm hf">Show / Hide hidden files</button> ');
+      area.find('.toolbar').append('<div class="bw"><button class="btn btn-default btn-sm hf">Hidden files</button></div>');
 
       area.find('.toolbar .hf').click(function () {
         Controller.index('hf');
       });
 
-      area.find('.toolbar').append('<button class="btn btn-default btn-sm nf">New folder</button> ');
+      if (Model.hf) area.find('.toolbar .hf').addClass('active');
+
+      area.find('.toolbar').append('<div class="bw"><button class="btn btn-default btn-sm nf">New folder</button></div>');
 
       area.find('.toolbar .nf').click(function () {
         Controller.mkdir();
@@ -434,9 +438,11 @@ FM.Area = function (selector, main_controller) {
   Controller.index();
 
   $(window).unbind('resize.area').bind('resize.area', function () {
-    $('.fm .area tbody').height(
-      Math.max($('.fm .area tbody').height() + $(window).height() - $('html').height() - 10, 200)
-    );
+    $('.fm .area tbody').each(function () {
+      $(this).height(
+        Math.max($(this).height() + $(window).height() - $('html').height() - 10, 200)
+      );
+    });
   });
 
   $(window).trigger('resize.area');
