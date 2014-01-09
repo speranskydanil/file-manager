@@ -1,3 +1,27 @@
+.fm {
+  position: relative;
+}
+
+.fm .switcher {
+  position: absolute;
+  top: 3px;
+  right: 50%;
+  width: 24px;
+  height: 24px;
+  margin-right: 18px;
+  background: url(images/arrow-right.png);
+}
+
+.fm-one .switcher {
+  position: absolute;
+  top: 3px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  margin-right: 0px;
+  background: url(images/arrow-left.png);
+}
+
 .fm .area {
   width: 49%;
 }
@@ -8,6 +32,14 @@
 
 .fm .area-2 {
   float: right;
+}
+
+.fm-one .area-1 {
+  width: 100%;
+}
+
+.fm-one .area-2 {
+  display: none;
 }
 
 .fm .cur-dir {
@@ -48,30 +80,41 @@
   width: 530px;
 }
 
-.fm th {
-  width: 80px;
-  cursor: pointer;
-}
-
-.fm th:first-child {
-  width: 230px;
-}
-
-.fm th:last-child {
-  width: 140px;
-}
-
+.fm th,
 .fm td {
   width: 80px;
   cursor: pointer;
 }
 
+.fm th:first-child,
 .fm td:first-child {
   width: 230px;
 }
 
+.fm th:last-child,
 .fm td:last-child {
   width: 140px;
+}
+
+.fm-one tr {
+  display: block;
+  width: 1100px;
+}
+
+.fm-one th,
+.fm-one td {
+  width: 200px;
+  cursor: pointer;
+}
+
+.fm-one th:first-child,
+.fm-one td:first-child {
+  width: 460px;
+}
+
+.fm-one th:last-child,
+.fm-one td:last-child {
+  width: 280px;
 }
 
 .fm tr:hover td {

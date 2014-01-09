@@ -229,34 +229,37 @@ FM.Area = function (selector, main_controller) {
                      '<td>' + item.ctime + '</td>' +
                    '</tr>');
 
-        var self = this;
-
-        (function (i, item) {
-          tr.click(function (e) {
-            var tr = $(this);
-
-            if (tr.hasClass('active')) {
-              if (Model.is_directory(item)) {
-                Controller.index(i);
-              } else if (Model.is_text(item)) {
-                Controller.show_text(i);
-              } else if (Model.is_media(item)) {
-                Controller.show_media(i);
-              } else {
-                self.message('the file is not readable');
-              }
-            } else {
-              if (!e.ctrlKey) {
-                tr.parent().children().removeClass('active');
-              }
-
-              tr.addClass('active');
-            }
-          });
-        })(i, item);
-
         area.find('tbody').append(tr);
       }
+
+      var self = this;
+
+      $(document)
+        .off('click.areatr', selector + ' tbody tr')
+        .on('click.areatr', selector + ' tbody tr', function (e) {
+        var tr = $(this);
+
+        var inx = tr.data('inx');
+        var item = Model.item(inx);
+
+        if (tr.hasClass('active')) {
+          if (Model.is_directory(item)) {
+            Controller.index(inx);
+          } else if (Model.is_text(item)) {
+            Controller.show_text(inx);
+          } else if (Model.is_media(item)) {
+            Controller.show_media(inx);
+          } else {
+            self.message('the file is not readable');
+          }
+        } else {
+          if (!e.ctrlKey) {
+            tr.parent().children().removeClass('active');
+          }
+
+          tr.addClass('active');
+        }
+      });
 
       area.find('table').stupidtable();
 

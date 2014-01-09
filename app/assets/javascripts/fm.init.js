@@ -2,6 +2,7 @@ var FM = {
   init: function (selector) {
     $(selector)
       .addClass('fm')
+      .append('<div class="switcher"></div>')
       .append(
         '<div class="area area-1">' +
           '<div class="cur-dir"></div>' +
@@ -15,6 +16,10 @@ var FM = {
           '<div class="area-table"></div>' +
         '</div>')
       .append('<div style="clear: both"></div>');
+
+    $(selector).find('.switcher').click(function () {
+      $(selector).toggleClass('fm-one');
+    });
 
     var main_controller = this.MainController();
 
