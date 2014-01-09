@@ -33,7 +33,7 @@ def stat pathname
     path: pathname.to_s,
     name: pathname.basename.to_s,
     type: type(pathname),
-    size: size(pathname),
+    size: pathname.directory? ? "#{pathname.entries.size - 2} objects" : size(pathname),
     bsize: s.size,
     mode: s.mode.to_s(8),
     ctime: s.ctime.strftime('%y-%m-%d %H:%M %Z').downcase
