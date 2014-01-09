@@ -37,7 +37,12 @@ FM.MainController = function () {
                  '/' +
                  encodeURIComponent(new_item_path),
             type: 'POST',
-            async: false,
+            success: function () {
+              self.buffer_type = undefined;
+              self.buffer_items = undefined;
+
+              self.update();
+            }
           });
         }
 
@@ -48,15 +53,15 @@ FM.MainController = function () {
                  '/' +
                  encodeURIComponent(new_item_path),
             type: 'POST',
-            async: false,
+            success: function () {
+              self.buffer_type = undefined;
+              self.buffer_items = undefined;
+
+              self.update();
+            }
           });
         }
       });
-
-      this.buffer_type = undefined;
-      this.buffer_items = undefined;
-
-      this.update();
     },
 
     delete: function (items) {
@@ -71,11 +76,11 @@ FM.MainController = function () {
               $.ajax({
                 url: '/remove/' + encodeURIComponent(item.path),
                 type: 'POST',
-                async: false,
+                success: function () {
+                  self.update();
+                }
               });
             });
-
-            self.update();
           }
         }
       });
@@ -95,10 +100,10 @@ FM.MainController = function () {
                    '/' +
                    encodeURIComponent(response),
               type: 'POST',
-              async: false,
+              success: function () {
+                self.update();
+              }
             });
-
-            self.update();
           }
         },
         value: item.name
@@ -119,10 +124,10 @@ FM.MainController = function () {
                    '/' +
                    encodeURIComponent(response),
               type: 'POST',
-              async: false,
+              success: function () {
+                self.update();
+              }
             });
-
-            self.update();
           }
         },
         value: item.name
@@ -143,10 +148,10 @@ FM.MainController = function () {
                    '/' +
                    encodeURIComponent(response),
               type: 'POST',
-              async: false,
+              success: function () {
+                self.update();
+              }
             });
-
-            self.update();
           }
         },
         value: item.name.replace('.zip', '')
@@ -169,10 +174,10 @@ FM.MainController = function () {
             $.ajax({
               url: '/mkdir/' + encodeURIComponent(path + '/' + response),
               type: 'POST',
-              async: false,
+              success: function () {
+                self.update();
+              }
             });
-
-            self.update();
           }
         },
         value: 'New directory'
