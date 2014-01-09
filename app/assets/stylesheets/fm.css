@@ -10,6 +10,7 @@
   height: 24px;
   margin-right: 18px;
   background: url(images/arrow-right.png);
+  cursor: pointer;
 
   -webkit-transition: all .4s linear;
           transition: all .4s linear;

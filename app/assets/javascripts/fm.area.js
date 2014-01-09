@@ -444,6 +444,7 @@ FM.Area = function (selector, main_controller) {
 
   $(window).unbind('resize.area').bind('resize.area', function () {
     var tbody = $('.fm .area tbody');
+    tbody.height(0);
     var height = Math.max(tbody.height() + $(window).height() - $('html').height() - 10, 200);
     tbody.height(height);
   });
