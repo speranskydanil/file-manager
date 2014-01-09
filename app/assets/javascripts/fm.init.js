@@ -18,7 +18,23 @@ var FM = {
       .append('<div style="clear: both"></div>');
 
     $(selector).find('.switcher').click(function () {
-      $(selector).toggleClass('fm-one');
+      if ($(selector).hasClass('fm-one')) {
+        $(selector).find('.area-2').css({ height: 0 }).toggle();
+
+        setTimeout(function () {
+          $(selector).toggleClass('fm-one');
+
+          setTimeout(function () {
+            $(selector).find('.area-2').css({ height: 'auto' })
+          }, 20);
+        }, 20);
+      } else {
+        $(selector).toggleClass('fm-one');
+
+        setTimeout(function () {
+          $(selector).find('.area-2').toggle();
+        }, 350);
+      }
     });
 
     var main_controller = this.MainController();
