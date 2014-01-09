@@ -370,6 +370,8 @@ FM.Area = function (selector, main_controller) {
         if (Model.cur_dir() != Model.base_dir()) Controller.index('up');
       });
 
+      if (Model.cur_dir() == Model.base_dir()) area.find('.toolbar .up').attr('disabled', 'disabled');
+
       area.find('.toolbar').append('<div class="bw"><button class="btn btn-default btn-sm update">Update</button></div>');
 
       area.find('.toolbar .update').click(function () {
