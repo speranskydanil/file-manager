@@ -443,11 +443,9 @@ FM.Area = function (selector, main_controller) {
   Controller.index();
 
   $(window).unbind('resize.area').bind('resize.area', function () {
-    $('.fm .area tbody').each(function () {
-      $(this).height(
-        Math.max($(this).height() + $(window).height() - $('html').height() - 10, 200)
-      );
-    });
+    var tbody = $('.fm .area tbody');
+    var height = Math.max(tbody.height() + $(window).height() - $('html').height() - 10, 200);
+    tbody.height(height);
   });
 
   $(window).trigger('resize.area');
