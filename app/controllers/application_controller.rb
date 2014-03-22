@@ -4,7 +4,10 @@ require 'filemagic'
 require 'shellwords'
 
 def type pathname
-  FileMagic.new(FileMagic::MAGIC_MIME).file(pathname.to_s)
+  magic = FileMagic.new(FileMagic::MAGIC_MIME)
+  result = magic.file(pathname.to_s)
+  magic.close
+  result
 end
 
 def size pathname
